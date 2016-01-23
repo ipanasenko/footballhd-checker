@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "footballhd.ru checker",
+    "description": "The name of the application"
+  },
+  "appDescription": {
+    "message": "Checks for new matches reviews on footballhd.ru",
+    "description": "The description of the application"
+  }
+}

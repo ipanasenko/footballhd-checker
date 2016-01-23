@@ -1,0 +1,108 @@
+@font-face {
+  font-family: 'globerxbold';
+  src: url('fonts/Fontfabric_Glober.Extra.Bold-webfont.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'globersemibold';
+  src: url('fonts/Glober SemiBold Free-webfont.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'neuronheavy';
+  src: url('fonts/Neuron-Heavy-webfont.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+#matches .p_video {
+  float: left;
+  width: 220px;
+  margin: 0 8px 9px 0;
+  position: relative;
+  z-index: 1;
+  text-shadow: #fff 1px 1px 0;
+  vertical-align: top;
+}
+
+#matches .p_video a {
+  display: block;
+  text-decoration: none;
+  font: 15px 'globerxbold', sans-serif;
+}
+
+#matches .p_video a b {
+  display: block;
+  position: relative;
+  z-index: 2;
+  height: 118px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+#matches .p_video a b img {
+  width: 220px;
+  height: 124px;
+}
+
+#matches .p_video a b i {
+  display: none;
+}
+
+#matches .p_video a u {
+  text-decoration: none;
+  display: block;
+  padding: 5px 8px 0 8px;
+}
+
+#matches .p_video a:hover u {
+  color: #ff6d00;
+}
+
+#matches .p_video:nth-child(3n) {
+  margin: 0 0 9px 0;
+}
+
+#matches .p_video:nth-child(4) {
+  clear: both;
+}
+
+#matches .p_video:nth-child(7) {
+  clear: both;
+}
+
+#matches .p_video:nth-child(10) {
+  clear: both;
+}
+
+#matches {
+  width: 556px;
+}
+
+#matches .p_video {
+  width: 180px;
+  margin: 0 8px 9px 0;
+}
+
+#matches .p_video a {
+  font: 14px 'globerxbold', sans-serif;
+}
+
+#matches .p_video a b {
+  height: 101px;
+}
+
+#matches .p_video span {
+  top: 81px;
+}
+
+#matches .p_video a b img {
+  width: 180px;
+  height: 101px;
+}
