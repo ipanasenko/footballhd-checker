@@ -9,7 +9,7 @@ function insertMatches(matches) {
   bg.setBadge('');
 
   if (!matches) {
-    $matches.html('checking for new matches...');
+    $matches.html('No new match reviews. Surf to <a href="http://footballhd.ru">http://footballhd.ru</a> to see all reviews');
     return;
   }
 
