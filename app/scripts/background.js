@@ -75,12 +75,10 @@ function loadMatchesPage(matchPage) {
       parsedMatches.find('.p_video > span').remove();
       parsedMatches.children('.clear').remove();
 
-      let matchesDivs = parsedMatches.find('.p_video');
-      let parsedIds = matchesDivs
+      let matchesDivs = parsedMatches.find('.p_video')
         .toArray()
-        .map(getMatchID)
-        .sort()
-        .reverse();
+        .sort((div1, div2) => getMatchID(div2) - getMatchID(div1));
+      let parsedIds = matchesDivs.map(getMatchID);
 
       console.groupCollapsed('response');
       console.log(parsedMatches);
@@ -98,7 +96,7 @@ function loadMatchesPage(matchPage) {
       saveSettings(settings);
 
       matches = jQuery('<div></div>')
-        .append(matchesDivs.filter((i, div) => newMatches.indexOf(getMatchID(div)) !== -1))
+        .append(matchesDivs)
         .html();
 
       chrome.runtime.sendMessage({ matches });
