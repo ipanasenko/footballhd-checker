@@ -1,6 +1,6 @@
 var football = 'http://footballhd.ru';
 var defaultSettings = {
-  latestMatch: 126965
+  latestMatch: 0
 };
 
 function footballify(s) {
