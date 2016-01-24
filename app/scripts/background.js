@@ -1,25 +1,28 @@
 'use strict';
 
+// needs to be var to be accessible from popup.js
 var matches;
 
 function setBadge(text) {
-  text = text || '';
+  if (text === '0') {
+    text = '';
+  }
 
   chrome.browserAction.setBadgeText({
-    text: text.toString()
+    text
   });
 }
 
-var loadingBadge = (function () {
-  var showLoading = false;
+let loadingBadge = (function () {
+  let showLoading = false;
   return {
-    show: function () {
+    show() {
       if (showLoading) {
         return;
       }
       showLoading = true;
 
-      var text = '    ...'.split('');
+      let text = '    ...'.split('');
 
       (function update() {
         if (!showLoading) {
@@ -33,7 +36,7 @@ var loadingBadge = (function () {
         }, 100);
       }());
     },
-    hide: function () {
+    hide() {
       showLoading = false;
       setBadge('');
     }
@@ -41,10 +44,9 @@ var loadingBadge = (function () {
 }());
 
 function loadSettings() {
-  var settingsLoader = jQuery.Deferred();
+  let settingsLoader = jQuery.Deferred();
 
   settingsLoader.done(function (settings) {
-    console.log('settings loaded:', settings);
   });
 
   chrome.storage.local.get(defaultSettings, function (settings) {
@@ -54,9 +56,7 @@ function loadSettings() {
 }
 
 function saveSettings(settings) {
-  console.log(settings);
   chrome.storage.local.set(settings, function () {
-    console.log('saved');
   });
 }
 
@@ -71,12 +71,12 @@ function loadMatchesPage(matchPage) {
     .then(function (settings, matchesData) {
       matchesData = jQuery(matchesData[0]);
 
-      var parsedMatches = matchesData.find('#m2v-1');
+      let parsedMatches = matchesData.find('#m2v-1');
       parsedMatches.find('.p_video > span').remove();
       parsedMatches.children('.clear').remove();
 
-      var matchesDivs = parsedMatches.find('.p_video');
-      var parsedIds = matchesDivs
+      let matchesDivs = parsedMatches.find('.p_video');
+      let parsedIds = matchesDivs
         .toArray()
         .map(getMatchID)
         .sort()
@@ -87,25 +87,21 @@ function loadMatchesPage(matchPage) {
       console.groupEnd('response');
       console.log(settings.latestMatch, parsedIds);
 
-      var newMatches = [];
+      let newMatches = [];
       if (settings.latestMatch !== 0) {
-        newMatches = parsedIds.filter(function (id) {
-          return id > settings.latestMatch;
-        });
+        newMatches = parsedIds.filter(id => id > 127095);
       }
 
-      setBadge(newMatches.length);
+      setBadge(String(newMatches.length));
 
       settings.latestMatch = parsedIds[0];
       saveSettings(settings);
 
       matches = jQuery('<div></div>')
-        .append(matchesDivs.filter(function (div) {
-          return newMatches.indexOf(getMatchID(this)) !== -1;
-        }))
+        .append(matchesDivs.filter((i, div) => newMatches.indexOf(getMatchID(div)) !== -1))
         .html();
 
-      chrome.runtime.sendMessage({ matches: matches });
+      chrome.runtime.sendMessage({ matches });
     });
 }
 

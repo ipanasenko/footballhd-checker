@@ -1,7 +1,7 @@
 'use strict';
 
-var bg = chrome.extension.getBackgroundPage();
-var $matches = jQuery('#matches');
+let bg = chrome.extension.getBackgroundPage();
+let $matches = jQuery('#matches');
 
 function insertMatches(matches) {
   matches = matches || bg.matches;
@@ -13,12 +13,14 @@ function insertMatches(matches) {
     return;
   }
 
-  bg.saveSettings({ latestMatch: bg.getMatchID(jQuery(matches)[0]) });
+  let latestMatch = bg.getMatchID(jQuery(matches)[0]);
+  bg.saveSettings({ latestMatch });
+
   matches = matches.replace(/<img src="/g, '<img src="' + football);
   $matches
     .empty()
     .append('<h3>New reviews:</h3>')
-    .append(matches);
+    .append(jQuery('<div></div>').append(matches));
 }
 
 insertMatches();
