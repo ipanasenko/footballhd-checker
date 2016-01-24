@@ -75,28 +75,37 @@ function loadMatchesPage(matchPage) {
       parsedMatches.find('.p_video > span').remove();
       parsedMatches.children('.clear').remove();
 
-      var parsedIds = parsedMatches.find('.p_video').toArray().map(getMatchID);
-
-      parsedMatches = matches = parsedMatches.html();
+      var matchesDivs = parsedMatches.find('.p_video');
+      var parsedIds = matchesDivs
+        .toArray()
+        .map(getMatchID)
+        .sort()
+        .reverse();
 
       console.groupCollapsed('response');
       console.log(parsedMatches);
       console.groupEnd('response');
       console.log(settings.latestMatch, parsedIds);
 
-      var newMatches = 0;
+      var newMatches = [];
       if (settings.latestMatch !== 0) {
         newMatches = parsedIds.filter(function (id) {
           return id > settings.latestMatch;
-        }).length;
+        });
       }
 
-      setBadge(newMatches);
+      setBadge(newMatches.length);
 
       settings.latestMatch = parsedIds[0];
       saveSettings(settings);
 
-      chrome.runtime.sendMessage({ matches: parsedMatches });
+      matches = jQuery('<div></div>')
+        .append(matchesDivs.filter(function (div) {
+          return newMatches.indexOf(getMatchID(this)) !== -1;
+        }))
+        .html();
+
+      chrome.runtime.sendMessage({ matches: matches });
     });
 }
 
