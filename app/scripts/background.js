@@ -89,7 +89,7 @@ function loadMatchesPage(matchPage) {
 
       let newMatches = [];
       if (settings.latestMatch !== 0) {
-        newMatches = parsedIds.filter(id => id > 127095);
+        newMatches = parsedIds.filter(id => id > settings.latestMatch);
       }
 
       setBadge(String(newMatches.length));
