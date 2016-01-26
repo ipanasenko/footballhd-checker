@@ -118,3 +118,10 @@ chrome.alarms.onAlarm.addListener(function (alarm) {
     initCheck();
   }
 });
+
+chrome.contextMenus.removeAll();
+chrome.contextMenus.create({
+  title: "Check now!",
+  contexts: ["browser_action"],
+  onclick: initCheck
+});
