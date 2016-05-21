@@ -16,7 +16,7 @@ function insertMatches(matches) {
   let latestMatch = bg.getMatchID(jQuery(matches)[0]);
   bg.saveSettings({ latestMatch });
 
-  matches = matches.replace(/<img src="/g, '<img src="' + football);
+  matches = matches.replace(/<img src="\/\//g, '<img src="http://');
   $matches
     .empty()
     .append('<h3>New reviews:</h3>')
