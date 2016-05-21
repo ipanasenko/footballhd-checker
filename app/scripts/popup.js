@@ -31,6 +31,6 @@ chrome.runtime.onMessage.addListener(function (request) {
 jQuery(document).on('click', 'a', function (e) {
   e.preventDefault();
   chrome.tabs.create({
-    url: this.getAttribute('href')
+    url: 'http:' + this.getAttribute('href')
   });
 });
